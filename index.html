@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        body {
+            font-size: 12px;
+            padding: 0;
+            margin: 0;
+        }
+
+        select {
+            border: 0;
+            /*隐藏select的下拉图标*/
+            /* appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none; */
+            /*去除高亮*/
+            -webkit-tap-highlight-color: #fff;
+            /*去除边框样式*/
+            outline: none;
+        }
+
+        a{
+            color: #000;
+        }
+        div {
+            box-sizing: border-box;
+        }
+
+        .head_img {
+            width: 100%;
+            height: 200px;
+        }
+
+        .head_box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, .3);
+        }
+
+        .head_bar {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 0px;
+        }
+
+        .head_bar>li {
+            cursor: pointer;
+            list-style: none;
+            padding: 10px 0;
+        }
+
+
+        .head_bar>li>select {
+            cursor: pointer;
+        }
+
+        .sclect_on {
+            padding: 10px 0;
+            position: relative;
+            color: #3cbbf9;
+        }
+
+        .sclect_on>select {
+            color: #3cbbf9;
+        }
+
+        li:hover {
+            /* background-color: #3f76f6; */
+        }
+
+        .sclect_on::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 60%;
+            min-width: 30px;
+            max-width: 60px;
+            height: 4px;
+            background: #3cbbf9;
+            border-radius: 10px;
+        }
+
+        .head_box input {
+            outline: none;
+            border: 0;
+            padding: 8px 10px;
+            color: #999;
+            background: #eee;
+            border-radius: 2px;
+        }
+
+        .login_btn {
+            padding: 2px 4px;
+            color: #fff;
+            border-radius: 4px;
+            background: #3cbbf9;
+            cursor: pointer;
+        }
+
+        .carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item {
+    flex: 0 0 100%;
+    position: relative; 
+    display: none;
+    height: 400px;
+    overflow: hidden; 
+}
+
+.carousel-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0.25rem;
+    z-index: 10;
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
+}
+
+/* 激活的轮播图片 */
+.carousel-item.active {
+    display: block;
+}
+        .news_item {
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .news_item>div {
+            flex: 1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            margin-right: 10px;
+        }
+
+        .news_item>span {
+            color: #777;
+        }
+
+        .news_item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 5px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .nav_box {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav_item {
+            position: relative;
+        }
+
+        .nav_box>div {
+            padding: 12px;
+            cursor: pointer;
+        }
+
+        .nav_item::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 4px;
+            background: #3cbbf9;
+            border-radius: 10px;
+        }
+
+        .name {
+            font-size: 16px;
+        }
+
+        .content {
+            color: #777;
+            padding: 12px 0;
+        }
+
+        .footer_box{
+            background: #d5e6fc;
+            width: 100%;
+            padding: 30px;
+        }
+        .nav-footer {
+            width: 100%;
+            display: flex;
+        align-items: center;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div style="background: #a6d7ff; padding: 12px ; text-align: right;">
+            我的杭电 > 学院邮箱 > 作品投稿 > languages
+        </div>
+        <img src="./img/图片1.jpg" alt="" class="head_img">
+    </div>
+    <div class="head_box">
+        <ul class="head_bar">
+            <li>首页</li>
+            <li>
+                <select name="languages" id="lang">
+                    <option value="javascript">专业概览</option>
+                    <option value="1">专业简介</option>
+                    <option value="2">师资力量</option>
+                    <option value="3">领导团队</option>
+                </select>
+            </li>
+            <li>
+                <select name="languages" id="lang">
+                    <option value="javascript">教学信息</option>
+                    <option value="1">专业简介</option>
+                    <option value="2">师资力量</option>
+                    <option value="3">领导团队</option>
+                </select>
+            </li>
+            <li>
+                <select name="languages" id="lang">
+                    <option value="javascript">招生就业</option>
+                    <option value="1">专业简介</option>
+                    <option value="2">师资力量</option>
+                    <option value="3">领导团队</option>
+                </select>
+            </li>
+            <li>
+                <select name="languages" id="lang">
+                    <option value="javascript">校园文化</option>
+                    <option value="1">专业简介</option>
+                    <option value="2">师资力量</option>
+                    <option value="3">领导团队</option>
+                </select>
+            </li>
+            <li>
+                <select name="languages" id="lang">
+                    <option value="javascript">资源下载</option>
+                    <option value="1">专业简介</option>
+                    <option value="2">师资力量</option>
+                    <option value="3">领导团队</option>
+                </select>
+            </li>
+        </ul>
+        <div style="width: 260px; display: flex;align-items: center;
+            justify-content: space-around;">
+            <input type="text" value="请输入...">
+            <div class="login_btn">
+                登录/注册
+            </div>
+        </div>
+    </div>
+     <!-- 图片轮播开始 -->
+     <div class="carousel">
+        <button class="carousel-control carousel-control-prev" onclick="prevSlide()">‹</button>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="./img/图片14.jpg" alt="Image 2">
+            </div>
+            <div class="carousel-item">
+                <img src="./img/图片13.png" alt="Image 3">
+            </div>
+            <div class="carousel-item">
+                <img src="./img/图片12.png" alt="Image 4">
+            </div>
+        </div>
+        <button class="carousel-control carousel-control-next" onclick="nextSlide()">›</button>
+    </div>
+    <!-- 图片轮播结束 -->
+
+    <div
+        style="width:100%;height: 300px; padding: 12px; display:flex; align-items: flex-start; justify-content:space-between;">
+        <img src="./img/图片2.jpg" alt="" style="width: 300px;">
+
+        <div style="flex: 1;height: 100%; border: 1px solid #999; margin: 0 15px;">
+            <div style="padding: 12px; border-bottom: 1px solid #999;font-size: 16px; font-weight: 700; color: #3f76f6;">综合新闻</div>
+            <div style=" display: flex; align-items: flex-start;">
+                <div style="width: 25%; margin: 12px;">
+                    <img style="width: 100%;" src="./img/图片3.jpg" alt="">
+                    <div>·新闻与传播硕士研究生赴浙江人民出版社参观学习</div>
+                </div>
+                <div style="flex: 1;padding: 12px ;">
+                    <div class="news_item">
+                        <div>在杭电看见“诗和远方”|人艺数法学院“茶话人生”第二期——宋韵点茶</div> <span>05-27</span>
+                    </div>
+                    <div class="news_item">
+                        <div>“书记有约”|人艺数法学院倾听师生心声，共话发展愿景</div> <span>05-27</span>
+                    </div>
+                    <div class="news_item">
+                        <div>杭电2024年校园招聘会人文经管类专场顺利开展</div> <span>04-26</span>
+                    </div>
+                    <div class="news_item">
+                        <div>“未来之星·电影技术大师班”工作坊暨时光坐标企业导师聘任仪式成功举办</div> <span>04-23</span>
+                    </div>
+                    <div class="news_item">
+                        <div>传播学专业赴浙江大学参加第十六届大学生广告艺术大赛浙江赛区启动仪式</div> <span>04-17</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width: 30%;height: 100%; border: 1px solid #999;">
+            <div
+                style="color: #3f76f6; padding: 12px; border-bottom: 1px solid #999;display: flex; justify-content: space-between;">
+                <span style="font-size: 16px; font-weight: 700;">通知公告</span>
+                <span>More</span>
+            </div>
+
+            <div>
+                <div class="nav_box" id="navId">
+                    <div>专业公告 </div>
+                    <div>学术资讯</div>
+                    <div>校园活动</div>
+                </div>
+                <div style="max-height: 200px; overflow: auto;overflow-x: hidden;">
+                    <div style="padding: 12px;">
+                        <div style="display: flex;align-items: center; justify-content: space-between;">
+                            <div>标题</div>
+                            <div style="color: #777;">时间</div>
+                        </div>
+                        <div style="color: #999;">请输入内容文本</div>
+                    </div>
+                    <div style="padding: 12px;">
+                        <div style="display: flex;align-items: center; justify-content: space-between;">
+                            <div>标题</div>
+                            <div style="color: #777;">时间</div>
+                        </div>
+                        <div style="color: #999;">请输入内容文本</div>
+                    </div>
+                    <div style="padding: 12px;">
+                        <div style="display: flex;align-items: center; justify-content: space-between;">
+                            <div>标题</div>
+                            <div style="color: #777;">时间</div>
+                        </div>
+                        <div style="color: #999;">请输入内容文本</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 12px; display: flex;justify-content: space-between;">
+        <div style="width: 40%;">
+            <div style="font-size: 18px;font-weight: 700; color: #3f76f6;">
+                <!-- <img src="./img/图片4.jpg" alt=""> -->
+                学者风采
+            </div>
+            <div style="display: flex; align-items: center;justify-content: space-between;flex-wrap: wrap;">
+                <div style="width: 50%;padding: 12px 40px;text-align: center; display: flex; flex-direction: column;align-items: center;justify-content: center;">
+                    <img src="./img/图片4.jpg" alt="" style="width: 80%;">
+                    <a style="display: block; text-align: center;" href="">李金城</a>
+                </div>
+                <div style="width: 50%;padding: 12px 40px;text-align: center; ">
+                    <img src="./img/图片5.jpg" alt="" style="width: 80%;">
+                    <a style="display: block; text-align: center;" href="">刘合翔</a>
+                </div>
+                <div style="width: 50%;padding: 12px 40px; text-align: center; ">
+                    <img src="./img/图片6.jpg" alt="" style="width: 80%;">
+                    <a style="display: block; text-align: center;" href="">李婷</a>
+                </div>
+                <div style="width: 50%;padding: 12px 40px; text-align: center; ">
+                    <img src="./img/图片7.jpg" alt="" style="width: 80%;">
+                    <a style="display: block; text-align: center;" href="">鲍娴</a>
+                </div>
+            </div>
+        </div>
+        <div style="flex: 1;">
+            <div style="font-size: 18px;font-weight: 700;color: #3f76f6;">专题展示</div>
+            <div
+                style="padding: 20px; display: flex; align-items: center;justify-content: space-between;flex-wrap: wrap;">
+                <div style="width: 49%;padding: 12px; border: 1px solid #eee;margin-bottom: 18px;">
+                    <img src="./img/图片8.jpg" alt="" style="width: 100%;height: 150px;">
+                    <div class="name">妙笔生花|第十六届大广赛校赛优秀作品一览</div>
+                    <!-- <div class="content ">内容</div>
+                    <div style="display: flex;justify-content: space-between;">
+                        <div>11111</div>
+                        <div style="padding: 2px 6px;border-radius: 4px;border: 1px solid #eee;">前往链接</div>
+                    </div> -->
+                </div>
+                <div style="width: 49%;padding: 12px; border: 1px solid #eee;margin-bottom: 18px;">
+                    <img src="./img/图片9.jpg" alt="" style="width: 100%; height: 150px;">
+                    <div class="name">讲座合集|近期学术讲座精彩回顾与最新资讯</div>
+                    <!-- <div class="content ">内容</div>
+                    <div style="display: flex;justify-content: space-between;">
+                        <div>11111</div>
+                        <div style="padding: 2px 6px;border-radius: 4px;border: 1px solid #eee;">前往链接</div>
+                    </div> -->
+                </div>
+                <div style="width: 49%;padding: 12px; border: 1px solid #eee;margin-bottom: 18px;">
+                    <img src="./img/图片10.jpg" alt="" style="width: 100%; height: 150px;">
+                    <div class="name">完美落幕|传播学专业竞赛尽显青春力量</div>
+                    <!-- <div class="content ">内容</div>
+                    <div style="display: flex;justify-content: space-between;">
+                        <div>11111</div>
+                        <div style="padding: 2px 6px;border-radius: 4px;border: 1px solid #eee;">前往链接</div>
+                    </div> -->
+                </div>
+                <div style="width: 49%;padding: 12px; border: 1px solid #eee;margin-bottom: 18px;">
+                    <img src="./img/图片11.jpg" alt="" style="width: 100%; height: 150px;">
+                    <div class="name">研途有你|师生一心，助力考研学子砥砺前行</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_box">
+        <div class="nav-footer">
+            <div style="font-size: 20px;">
+                <div>杭州电子科技大学</div>
+                <div>传播学专业</div>
+            </div>
+            <div style="height: 120px; padding: 12px;border-radius: 12px; background: #83b1ec;">
+                <div>联系我们</div>
+                <div>
+                    联系方式：杭州市下沙高教园区杭州电子科技大学人文艺术与数字媒体学院转传播系（310037）
+                </div>
+                <div>
+                    学院电话：0571-8687505
+                </div>
+                <div>
+                    杭州电子科技大学 人文艺术与数字媒体学院 版权所有
+                </div>
+                <div>
+                    学院邮箱：xwcb@hdu.edu.cn
+                </div>
+            </div>
+            <div style="height: 120px; padding: 12px;border-radius: 12px; background: #83b1ec;">
+                <div>友情链接</div>
+                <div><a href="http://www.hdu.edu.cn">杭州电子科技大学
+                </a></div>
+    
+                <div>
+                    <a href="http://www.syxy.hdu.edu.cn">人文艺术与数字媒体学院
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div style="color: #999; font-size: 12px;text-align: center;">
+            Copyright © 2024 Apple Inc. 保留所有权利。隐私政策 使用条款 销售政策 法律信息 网站地图
+    京ICP备1030号 营业执照 备案编号11201910351200
+        </div>
+    </div>
+    
+</body>
+<script>
+    var lis = document.querySelectorAll('li')
+    lis[0].className = 'sclect_on'
+    for (i = 0; i < lis.length; i++) {
+        lis[i].setAttribute('index', i)
+        lis[i].onclick = function () {
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].className = ''
+            }
+            this.className = 'sclect_on'
+            var index = this.getAttribute('index')
+        }
+    }
+    var navItems = document.getElementById('navId').getElementsByTagName("div");
+    // console.log(navItems)
+    navItems[0].className = 'nav_item'
+    for (let index = 0; index < navItems.length; index++) {
+        navItems[index].setAttribute('index', index)
+        navItems[index].onclick = function () {
+            for (var k = 0; k < navItems.length; k++) {
+                navItems[k].className = ''
+            }
+            this.className = 'nav_item'
+            // var translateY = this.getAttribute('index')
+        }
+    }
+
+        let index = 0;
+        const slides = document.querySelectorAll('.carousel-item');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach((slide) => {
+                slide.classList.remove('active');
+            });
+            slides[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            index++;
+            if (index >= totalSlides) index = 0;
+            showSlide(index);
+        }
+
+        function prevSlide() {
+            index--;
+            if (index < 0) index = totalSlides - 1;
+            showSlide(index);
+        }
+
+        // 自动轮播
+        setInterval(nextSlide, 3000); // 3秒切换一次
+    </script>
+
+</script>
+
+</html>
